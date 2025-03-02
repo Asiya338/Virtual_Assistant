@@ -2,7 +2,6 @@ import speech_recognition as sr
 from requests_html import HTMLSession
 import speak
 
-
 def spech_to_text():
     r =  sr.Recognizer()
     with sr.Microphone() as source:

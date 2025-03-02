@@ -3,7 +3,6 @@ from PIL import Image , ImageTk
 import action 
 import spech_to_text 
 
-
 def User_send():
     send = entry1.get()
     bot = action.Action(send)
