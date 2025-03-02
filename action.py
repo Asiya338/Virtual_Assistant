@@ -2,10 +2,9 @@ import datetime
 import speak
 import webbrowser
 import weather
-import os
 import wikipedia
 import speech_recognition as sr
-
+import os
 def get_input():
     """Function to take input from either speech or text."""
     choice = input("Enter '1' for text input, '2' for voice input: ")
@@ -53,6 +52,7 @@ def Action(send):
 
     elif "shutdown" in data_btn or "quit" in data_btn:
         speak.speak("Okay sir, shutting down.")
+        os.system("shutdown /s /t 5") 
         return "Okay sir, shutting down."
 
     elif "play music" in data_btn:
@@ -64,6 +64,11 @@ def Action(send):
         webbrowser.open("https://google.com/")
         speak.speak("Google is open.")  
         return "Google is open."
+    
+    elif "open chatgpt" in data_btn:
+        webbrowser.open("https://chatgpt.com/")
+        speak.speak("Chatgpt is open.")  
+        return "Chatgpt is open."
 
     elif "open youtube" in data_btn:
         webbrowser.open("https://youtube.com/")
@@ -91,6 +96,16 @@ def Action(send):
         except wikipedia.exceptions.PageError:
             speak.speak("No relevant page found on Wikipedia.")
             return "No relevant page found on Wikipedia."
+
+    elif "google" in data_btn:
+        query = data_btn.replace("google", "").strip()
+    
+        if query:
+           url = f"https://www.google.com/search?q={query}"
+           webbrowser.open(url)
+           return f"Searching Google for {query}..."
+        else:
+           return "Please mention what you want to search on Google."
 
     else:
         speak.speak("I'm unable to understand!")
