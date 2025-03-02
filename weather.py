@@ -1,7 +1,7 @@
 import requests
 
 def Weather(query="karimnagar,in"):
-    api_key = "291290045819b12b5d33789c4810e71e"  # Replace with your actual API key
+    api_key = " 908i_90jnmshaiojnzx009qkc4810e71e"  # Replace with your actual API key
     url = f"http://api.openweathermap.org/data/2.5/weather?q={query}&appid={api_key}&units=metric"
     response = requests.get(url)
     
