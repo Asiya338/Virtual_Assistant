@@ -1,21 +1,32 @@
-# my user agent is : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36
-# print(r.html.find('title' , first= True).text) 
-# requests-html==0.10.0
-# lxml==4.9.1 (first install  this one)
+import requests
 
-from requests_html import HTMLSession
-import spech_to_text
+def Weather(query="karimnagar,in"):
+    api_key = "291290045819b12b5d33789c4810e71e"  # Replace with your actual API key
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={query}&appid={api_key}&units=metric"
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        data = response.json()
+        
+        if "main" in data:
+            description = data["weather"][0]["description"]
+            
+            # Check for specific weather conditions and return an appropriate message
+            if "clear" in description:
+                return "Today is sunny."
+            elif "cloud" in description:
+                return "Today is cloudy."
+            elif "rain" in description:
+                return "Today is rainy."
+            elif "humidity" in description:
+                return "Today is humid."
+            else:
+                return "Weather condition not recognized."
+        else:
+            return "Weather data not available for this location."
+    else:
+        return f"Error: Unable to fetch data (Status code: {response.status_code})"
 
-def Weather():
-    s  =  HTMLSession()
-    query = "patna"
-    url = f'https://www.google.com/search?q=weather+{query}'
-    r  = s.get(url , headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36'})
+# Test the function
+print(Weather())
 
-    temp  = r.html.find('span#wob_tm' , first= True).text
-    unit = r.html.find('div.vk_bk.wob-unit span.wob_t' , first= True).text
-    desc  = r.html.find('span#wob_dc' , first= True).text
-    return temp+" "+unit+" "+ desc
-
-
-  

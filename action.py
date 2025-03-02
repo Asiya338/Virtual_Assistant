@@ -4,9 +4,6 @@ import webbrowser
 import weather
 import os
 
-
-
-
 def Action(send) :   
   
     data_btn  = send.lower()
@@ -16,22 +13,30 @@ def Action(send) :
       return "my name is virtual Assistant"
 
     elif "hello" in data_btn  or "hye" in data_btn  or "hay" in data_btn: 
-        speak.speak("Hey sir, How i can  help you !")  
-        return "Hey sir, How i can  help you !" 
+        speak.speak("Hey sir, How I can  help you !")  
+        return "Hey sir, How I can  help you !" 
 
     elif "how are you" in  data_btn :
             speak.speak("I am doing great these days sir") 
             return "I am doing great these days sir"   
 
     elif "thanku" in data_btn or "thank" in data_btn:
-           speak.speak("its my pleasure sir to stay with you")
-           return "its my pleasure sir to stay with you"      
+           speak.speak("it`s my pleasure sir to stay with you")
+           return "it`s my pleasure sir to stay with you"      
 
     elif "good morning" in data_btn:
-           speak.speak("Good morning sir, i think you might need some help")
-           return "Good morning sir, i think you might need some help"   
+           speak.speak("Good morning sir, I think you might need some help")
+           return "Good morning sir, I think you might need some help"   
+    
+    elif "good evening" in data_btn:
+           speak.speak("Good Evening sir, I think you might need some help")
+           return "Good Evening sir, I think you might need some help"   
+    
+    elif "good afternoon" in data_btn:
+           speak.speak("Good afternoon sir, I think you might need some help")
+           return "Good afternoon sir, I think you might need some help"   
 
-    elif "time now" in data_btn:
+    elif "time" or "time now" in data_btn or "what is time now" in data_btn:
           current_time = datetime.datetime.now()
           Time = (str)(current_time.hour)+ " Hour : ", (str)(current_time.minute) + " Minute" 
           speak.speak(Time)
@@ -57,13 +62,19 @@ def Action(send) :
         url = 'https://youtube.com/'
         webbrowser.get().open(url)
         speak.speak("YouTube open") 
-        return "YouTube open"    
-    
-    elif 'weather' in data_btn :
+        return "YouTube open"
+
+    elif 'chatgpt' in data_btn or "open chatgpt" in  data_btn:
+        url = 'https://chatgpt.com/'
+        webbrowser.get().open(url)
+        speak.speak("chatgpt open") 
+        return "chatgpt open"
+
+    elif 'weather' in data_btn:
        ans   = weather.Weather()
        speak.speak(ans) 
        return ans
-
+        
     elif 'music from my laptop' in data_btn:
         url = 'D:\\music' 
         songs = os.listdir(url)
